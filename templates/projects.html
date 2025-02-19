@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+{% load embed_video_tags %}
+{% load static %}
+{% block content %}
+
+{% for v in Videos %}
+
+    <h1 class="mb-5">{{v.title}}</h1>
+    <div class="px-3 mb-5">
+        {% video v.video '426x240' %}
+    </div>
+{% endfor %}
+{% for r in ranks %}
+    {{r.rank}}
+    <img src="{% static r.rank_image %}" />
+{% endfor %}
+
+
+{% endblock content %}
+
