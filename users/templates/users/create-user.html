@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="form-class">
+<!--  <div class="form-box">-->
+    <form class="form-box" method="POST">
+      {% csrf_token %}
+        <span class="field-label-error">{{errors}}</span>
+        {% for field in form %}
+        <span class="field-label">{{field.label}}</span>
+        {{field}}
+        {% endfor %}
+
+      <input type="submit">
+    </form>
+<!--  </div>-->
+</div>
+{% endblock content %}

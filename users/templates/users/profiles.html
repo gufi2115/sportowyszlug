@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="profiles-container">
+<!--    <div class="flexbox-container">-->
+    {% for profile in page_obj %}
+    <div class="profiles">
+        <a class="flexbox btn" href="{% url 'profile' profile.id %}">{{profile.username}}</a>
+        <div class="flex-image">
+        <img src="{% static profile.profile_image %}"/>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a class="pagination-a-arr" href="?page={{ page_obj.previous_page_number }}">←</a>
+        {% endif %}
+
+        {% if not 1 in page_list and page_obj.paginator.num_pages > 1  %}
+            <a class="pagination-a" href="?page=1">1⮐</a>
+        {% endif %}
+
+        {% for page in page_list  %}
+            {% if page == page_obj.number %}
+                <a class="pagination-a-hover" href="?page={{ page }}">{{ page }}</a>
+            {% else %}
+                <a class="pagination-a" href="?page={{ page }}">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if not page_obj.paginator.num_pages in page_list and page_obj.paginator.num_pages > 1 %}
+            <a class="pagination-a" href="?page={{ page_obj.paginator.num_pages }}">⮑{{ page_obj.paginator.num_pages }}</a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <a class="pagination-a" href="?page={{ page_obj.next_page_number }}">→</a>
+        {% endif %}
+    </span>
+</div>
+
+
+{% endblock content %}

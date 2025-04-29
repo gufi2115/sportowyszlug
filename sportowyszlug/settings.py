@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 
-from django.conf.global_settings import MEDIA_ROOT, STATIC_ROOT
+from django.conf.global_settings import MEDIA_ROOT, STATIC_ROOT, LOGIN_URL
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'embed_video',
     'projects.apps.ProjectsConfig',
+    'users.apps.UsersConfig',
 
 ]
 
@@ -125,11 +126,18 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
+LOGIN_URL = '/login/'
+
 USE_I18N = True
 
 USE_TZ = True
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'buber2006xdd@gmail.com'
+EMAIL_HOST_PASSWORD = 'xify toor cion uctb'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
@@ -138,11 +146,12 @@ STATIC_URL = '/static/'
 MEDIA_URL = ''
 
 STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static/'),
     os.path.join(BASE_DIR, 'static/files/images')
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/files/images')
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/files')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
