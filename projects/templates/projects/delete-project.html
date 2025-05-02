@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+<div class="delete-class">
+    <div>
+        <h1>DELETE PROJECT</h1>
+    </div>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="buttons">
+                <input class="btn" type="submit" value="delete"/>
+            </div>
+        </form>
+        <div class="buttons">
+            <a href="{% url 'project' project.id %}"><button class="btn">&#8592; BACK</button></a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+<!--    <div class="flexbox-container">-->
+    <div class="profiles-container">
+        {% for project in page_obj %}
+<!--        <div class="projects">-->
+        <div class="profiles">
+            <a class="flexbox btn" href="{% url 'project' project.id%}">{{project.title}}</a>
+            <hr/>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a class="pagination-a-arr" href="?page={{ page_obj.previous_page_number }}">←</a>
+        {% endif %}
+
+        {% if not 1 in page_list and page_obj.paginator.num_pages > 1  %}
+            <a class="pagination-a" href="?page=1">1⮐</a>
+        {% endif %}
+
+        {% for page in page_list  %}
+            {% if page == page_obj.number %}
+                <a class="pagination-a-hover" href="?page={{ page }}">{{ page }}</a>
+            {% else %}
+                <a class="pagination-a" href="?page={{ page }}">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if not page_obj.paginator.num_pages in page_list and page_obj.paginator.num_pages > 1 %}
+            <a class="pagination-a" href="?page=6">⮑{{ page_obj.paginator.num_pages }}</a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <a class="pagination-a" href="?page={{ page_obj.next_page_number }}">→</a>
+        {% endif %}
+    </span>
+</div>
+
+
+{% endblock content %}
+
